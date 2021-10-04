@@ -1,9 +1,17 @@
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
+import Login from './pages/Login';
+import GlobalStyle from './styles/globalStyle';
 
 function App() {
   return (
-    <div className="App">
-    </div>
+    <>
+      <GlobalStyle />
+      <Switch>
+        <Route path='/login' exact component={Login} />
+      </Switch>
+    </>
   );
 }
 
