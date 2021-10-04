@@ -8,7 +8,8 @@ import Button from '../styled-components/ButtonLogin.style';
 import { Loader } from '../styled-components/Loader.style';
 
 import {
-  moviesTopRated,
+  moviesNowPlaying,
+  moviesTopRated, moviesUpcomming,
 } from '../thunks/moviesThunks';
 
 class Login extends Component {
@@ -23,7 +24,7 @@ class Login extends Component {
   setLoggin = () => {
     this.setState({ butonClicked: true });
     setTimeout(() => {
-      // this.setState({ isLoggedIn: true });
+      this.setState({ isLoggedIn: true });
     }, 3000);
   };
 
@@ -31,14 +32,15 @@ class Login extends Component {
     e.preventDefault();
   };
 
-  getMovies = () => {
-    const { getMoviesTopRated } = this.props;
-    getMoviesTopRated();
+  getMovies = async () => {
+    const { getMoviesNowPlaying, getMoviesUpcomming } = this.props;
+    await getMoviesNowPlaying();
+    await getMoviesUpcomming();
   };
 
-  handleLogin = () => {
+  handleLogin = async () => {
+    await this.getMovies();
     this.setLoggin();
-    this.getMovies();
   };
 
   render() {
@@ -74,12 +76,12 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  movies: state.moviesReducer.movies,
   isFetching: state.moviesReducer.isFetching,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getMoviesTopRated: () => dispatch(moviesTopRated()),
+  getMoviesNowPlaying: () => dispatch(moviesNowPlaying()),
+  getMoviesUpcomming: () => dispatch(moviesUpcomming()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

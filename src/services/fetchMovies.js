@@ -1,10 +1,10 @@
 import { KEY, LANGUAGE, URL_BASE } from '../constants';
 
-export const allMovies = async () => {
-  const response = await fetch();
-  const data = await response.json();
-  return data;
-};
+// export const allMovies = async () => {
+//   const response = await fetch();
+//   const data = await response.json();
+//   return data;
+// };
 
 export const topRated = async () => {
   try {
@@ -18,6 +18,7 @@ export const topRated = async () => {
     }
 };
 
+// busca filmes recomendados com base no id de um filme.
 export const recommendations = async (movie_id) => {
   try {
     const response = await fetch(
@@ -30,6 +31,7 @@ export const recommendations = async (movie_id) => {
     }
 };
 
+// busca filmes em cartaz
 export const nowPlaying = async () => {
   try {
     const response = await fetch(
@@ -42,6 +44,7 @@ export const nowPlaying = async () => {
     }
 };
 
+// busca os próximos lançamentos
 export const upcomingReleases = async () => {
   try {
     const response = await fetch(

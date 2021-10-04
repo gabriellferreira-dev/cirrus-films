@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const StyledLoginPage = styled.section`
-  position: relative;
   width: 100%;
   height: 100vh;
   background: #0e0e0e;

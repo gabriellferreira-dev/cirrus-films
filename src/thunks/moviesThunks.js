@@ -1,10 +1,10 @@
 import { getMoviesFail, getMoviesSucess, requestMovies } from '../actions';
-import { allMovies, nowPlaying, recommendations, topRated, upcomingReleases } from '../services/fetchMovies';
-
-export const getMovies = () => async (dispatch) => {
-  dispatch(requestMovies);
-  const movies = await allMovies();
-};
+import {
+  nowPlaying,
+  recommendations,
+  topRated,
+  upcomingReleases,
+} from '../services/fetchMovies';
 
 export const moviesTopRated = () => async (dispatch) => {
   dispatch(requestMovies());
