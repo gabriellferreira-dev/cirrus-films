@@ -29,3 +29,15 @@ export const recommendations = async (movie_id) => {
       console.log(err);
     }
 };
+
+export const nowPlaying = async () => {
+  try {
+    const response = await fetch(
+      `${URL_BASE}/now_playing?api_key=${KEY}&language=${LANGUAGE}&page=1`
+      );
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+};

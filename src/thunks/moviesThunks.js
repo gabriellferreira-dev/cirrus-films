@@ -23,3 +23,12 @@ export const moviesRecommended = (movie_id) => async (dispatch) => {
 
   return dispatch(getMoviesSucess('recommended', movies.results));
 };
+
+export const moviesNowPlaying = (movie_id) => async (dispatch) => {
+  dispatch(requestMovies());
+  const movies = await recommendations(movie_id);
+
+  if (!movies.results) return dispatch(getMoviesFail(movies.status_message));
+
+  return dispatch(getMoviesSucess('now_playing', movies.results));
+};
