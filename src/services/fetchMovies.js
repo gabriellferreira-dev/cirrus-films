@@ -41,3 +41,15 @@ export const nowPlaying = async () => {
       console.log(err);
     }
 };
+
+export const upcomingReleases = async () => {
+  try {
+    const response = await fetch(
+      `${URL_BASE}/upcoming?api_key=${KEY}&language=${LANGUAGE}&page=1`
+      );
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+};

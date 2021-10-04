@@ -1,5 +1,5 @@
 import { getMoviesFail, getMoviesSucess, requestMovies } from '../actions';
-import { allMovies, recommendations, topRated } from '../services/fetchMovies';
+import { allMovies, nowPlaying, recommendations, topRated, upcomingReleases } from '../services/fetchMovies';
 
 export const getMovies = () => async (dispatch) => {
   dispatch(requestMovies);
@@ -24,11 +24,20 @@ export const moviesRecommended = (movie_id) => async (dispatch) => {
   return dispatch(getMoviesSucess('recommended', movies.results));
 };
 
-export const moviesNowPlaying = (movie_id) => async (dispatch) => {
+export const moviesNowPlaying = () => async (dispatch) => {
   dispatch(requestMovies());
-  const movies = await recommendations(movie_id);
+  const movies = await nowPlaying();
 
   if (!movies.results) return dispatch(getMoviesFail(movies.status_message));
 
   return dispatch(getMoviesSucess('now_playing', movies.results));
+};
+
+export const moviesUpcomming = () => async (dispatch) => {
+  dispatch(requestMovies());
+  const movies = await upcomingReleases();
+
+  if (!movies.results) return dispatch(getMoviesFail(movies.status_message));
+
+  return dispatch(getMoviesSucess('upcomming', movies.results));
 };
