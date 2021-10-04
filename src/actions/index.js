@@ -8,9 +8,9 @@ export const requestMovies = () => ({
   type: MOVIES_REQUEST,
 });
 
-export const getMoviesSucess = (movies) => ({
+export const getMoviesSucess = (key, movies) => ({
   type: GET_MOVIES_SUCCESS,
-  payload: movies,
+  payload: { key, movies },
 });
 
 export const getMoviesFail = (error) => ({

@@ -10,7 +10,11 @@ const moviesReducer = (state = INITIAL_STATE, { type, payload }) => {
     case MOVIES_REQUEST:
       return { ...state, isFetching: true };
     case GET_MOVIES_SUCCESS:
-      return { ...state, movies: payload, isFetching: false };
+      return {
+        ...state,
+        movies: { ...state.movies, [payload.key]: payload.movies },
+        isFetching: false,
+      };
     case GET_MOVIES_FAIL:
       return { ...state, error: payload, isFetching: false };
     default:

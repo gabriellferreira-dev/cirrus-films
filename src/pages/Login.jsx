@@ -7,7 +7,9 @@ import { ReactComponent as GoogleIcon } from '../images/google.svg';
 import Button from '../styled-components/ButtonLogin.style';
 import { Loader } from '../styled-components/Loader.style';
 
-import { getMoviesTopRated } from '../thunks/moviesThunks';
+import {
+  moviesTopRated,
+} from '../thunks/moviesThunks';
 
 class Login extends Component {
   constructor(props) {
@@ -19,10 +21,10 @@ class Login extends Component {
   }
 
   setLoggin = () => {
-    this.setState({ butonClicked: true })
+    this.setState({ butonClicked: true });
     setTimeout(() => {
-      this.setState({ isLoggedIn: true });
-    }, 3000)
+      // this.setState({ isLoggedIn: true });
+    }, 3000);
   };
 
   onSubmitForm = (e) => {
@@ -32,19 +34,19 @@ class Login extends Component {
   getMovies = () => {
     const { getMoviesTopRated } = this.props;
     getMoviesTopRated();
-  }
+  };
 
   handleLogin = () => {
     this.setLoggin();
     this.getMovies();
-  }
+  };
 
   render() {
     const { isLoggedIn, butonClicked } = this.state;
     const { isFetching } = this.props;
 
     if (!isFetching && isLoggedIn) {
-      return <Redirect to="/" />;
+      return <Redirect to='/' />;
     }
 
     return (
@@ -74,10 +76,10 @@ class Login extends Component {
 const mapStateToProps = (state) => ({
   movies: state.moviesReducer.movies,
   isFetching: state.moviesReducer.isFetching,
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  getMoviesTopRated: () => dispatch(getMoviesTopRated()),
-})
+  getMoviesTopRated: () => dispatch(moviesTopRated()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

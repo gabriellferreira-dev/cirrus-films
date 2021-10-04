@@ -1,5 +1,4 @@
-const LANGUAGE = 'pt-BR';
-const KEY = '70da466e066a15e9925917816d96e861';
+import { KEY, LANGUAGE, URL_BASE } from '../constants';
 
 export const allMovies = async () => {
   const response = await fetch();
@@ -10,7 +9,19 @@ export const allMovies = async () => {
 export const topRated = async () => {
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/top_rated?api_key=${KEY}&language=${LANGUAGE}&page=1`
+      `${URL_BASE}/top_rated?api_key=${KEY}&language=${LANGUAGE}&page=1`
+      );
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+};
+
+export const recommendations = async (movie_id) => {
+  try {
+    const response = await fetch(
+      `${URL_BASE}/${movie_id}/recommendations?api_key=${KEY}&language=${LANGUAGE}&page=1`
       );
       const data = await response.json();
       return data;
