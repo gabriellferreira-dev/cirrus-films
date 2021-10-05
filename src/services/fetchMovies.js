@@ -48,7 +48,7 @@ export const nowPlaying = async () => {
 export const upcomingReleases = async () => {
   try {
     const response = await fetch(
-      `${URL_BASE}/upcoming?api_key=${KEY}&language=${LANGUAGE}&page=1`
+      `${URL_BASE}/upcoming?api_key=${KEY}&language=${LANGUAGE}&page=2`
       );
       const data = await response.json();
       return data;
@@ -56,3 +56,15 @@ export const upcomingReleases = async () => {
       console.log(err);
     }
 };
+
+export const movieImages = async (movie_id) => {
+  try {
+    const response = await fetch(
+      `${URL_BASE}/${movie_id}/images?api_key=${KEY}&language=pt`
+      );
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+}

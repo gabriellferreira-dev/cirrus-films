@@ -7,52 +7,49 @@ import { ReactComponent as GoogleIcon } from '../images/google.svg';
 import Button from '../styled-components/ButtonLogin.style';
 import { Loader } from '../styled-components/Loader.style';
 
-import {
-  moviesNowPlaying,
-  moviesTopRated, moviesUpcomming,
-} from '../thunks/moviesThunks';
+import { moviesNowPlaying, moviesupcoming } from '../thunks/moviesThunks';
+
+import { setLogin as setLoginAction } from '../actions/index';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false,
       butonClicked: false,
     };
   }
-
-  setLoggin = () => {
-    this.setState({ butonClicked: true });
-    setTimeout(() => {
-      this.setState({ isLoggedIn: true });
-    }, 3000);
-  };
 
   onSubmitForm = (e) => {
     e.preventDefault();
   };
 
   getMovies = async () => {
-    const { getMoviesNowPlaying, getMoviesUpcomming } = this.props;
+    const { getMoviesNowPlaying, getMoviesupcoming } = this.props;
     await getMoviesNowPlaying();
-    await getMoviesUpcomming();
+    await getMoviesupcoming();
   };
 
-  handleLogin = async () => {
-    await this.getMovies();
-    this.setLoggin();
+  handleLogin = () => {
+    const { setLogin } = this.props;
+    this.getMovies();
+
+    this.setState({ butonClicked: true });
+    setTimeout(() => {
+      setLogin();
+    }, 3000);
   };
 
   render() {
-    const { isLoggedIn, butonClicked } = this.state;
-    const { isFetching } = this.props;
+    const { butonClicked } = this.state;
+    const { isFetching, isLogged } = this.props;
 
-    if (!isFetching && isLoggedIn) {
-      return <Redirect to='/' />;
-    }
+    // if (!isFetching && isLogged) {
+    //   return <Redirect to='/' />;
+    // }
 
     return (
       <StyledLoginPage>
+        {!isFetching && isLogged && <Redirect to='/' />}
         <div>
           <img src={logo} alt='logo' />
           <form onSubmit={this.onSubmitForm}>
@@ -77,11 +74,13 @@ class Login extends Component {
 
 const mapStateToProps = (state) => ({
   isFetching: state.moviesReducer.isFetching,
+  isLogged: state.loginReducer.isLogged,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getMoviesNowPlaying: () => dispatch(moviesNowPlaying()),
-  getMoviesUpcomming: () => dispatch(moviesUpcomming()),
+  getMoviesupcoming: () => dispatch(moviesupcoming()),
+  setLogin: () => dispatch(setLoginAction()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyledHeader } from '../styled-components/Header';
 import { HeaderButton } from '../styled-components/HeaderButton.style';
 import { BsInfoCircle, BsPlayFill } from 'react-icons/bs';
 import { MdFavoriteBorder } from 'react-icons/md';
@@ -7,6 +6,7 @@ import { PlayButton } from '../styled-components/PlayButton.style';
 import { UserButton } from '../styled-components/UserButton.style';
 import { CartButton } from '../styled-components/CartButton.style';
 import { AiOutlineUser, AiOutlineShoppingCart } from 'react-icons/ai';
+import { StyledHeader } from '../styled-components/Header.style';
 
 const Header = ({ movies }) => {
   const randomMovie = movies.sort(() => Math.random() - 0.5)[0];

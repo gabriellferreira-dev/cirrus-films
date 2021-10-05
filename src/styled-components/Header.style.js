@@ -13,7 +13,7 @@ export const StyledHeader = styled.header`
     css`
       background: linear-gradient(
           180deg,
-          rgba(14, 14, 14, 0.2) 50%,
+          rgba(14, 14, 14, 0.2) 80%,
           #0e0e0e 100%
         ),
         url(${posterPath});

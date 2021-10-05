@@ -1,9 +1,11 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import './App.css';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import GlobalStyle from './styles/globalStyle';
+
+// import 'slick-carousel/slick/slick.css';
+// import 'slick-carousel/slick/slick-theme.css';
 
 function App() {
   return (

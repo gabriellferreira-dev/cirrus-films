@@ -12,7 +12,7 @@ const moviesReducer = (state = INITIAL_STATE, { type, payload }) => {
     case GET_MOVIES_SUCCESS:
       return {
         ...state,
-        movies: { ...state.movies, [payload.key]: payload.movies },
+        movies: { ...state.movies, [payload.key]: payload.data },
         isFetching: false,
       };
     case GET_MOVIES_FAIL:
